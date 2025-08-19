@@ -25,4 +25,26 @@ Started ['controller/trajectory'] successfully
 
 Started ['controller/trajectory'] successfully
 
- 
+As the topics are published in ros1, you need to bridge them to ros2.
+
+### Bridge ros1 & ros2
+Second, open a new terminal.
+
+```bash
+source /opt/ros/noetic/setup.bash
+source /opt/ros/foxy/setup.bash
+ros2 run ros1_bridge dynamic_bridge --bridge-all-topics
+```
+
+### Check fingertip topic (optional)
+It is optional for checking topic /senseglove/rh/fingertip_positions
+
+```bash
+source /opt/ros/foxy/setup.bash
+ros2 topic echo /senseglove/rh/fingertip_positions
+```
+
+/senseglove/rh/fingertip_positions topic refers to the xyz coordianate of thumb, index, middle, ring, pinky.
+
+### Isaacsim teleoperation 
+Third, 
