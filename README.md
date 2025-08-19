@@ -5,7 +5,6 @@ This is about how to set up teloperation for senseglove and shadowhand lite in I
 
 ## Senseglove setup
 First, open a new terminal.
-
 ```bash
 source /opt/ros/noetic/setup.bash
 cd senseglove_ws
