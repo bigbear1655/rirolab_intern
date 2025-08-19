@@ -13,7 +13,7 @@ source /opt/ros/noetic/setup.bash
 cd senseglove_ws
 roslaunch senseglove_launch senseglove_demo.launch
 
-Then, you can check Sensecom works. If all topics are successfully published, you can check the below logs. 
+Then, you can check Sensecom works. If all topics are successfully published, you can check the below logs. If it does not work, you have to try again until it succeeds
 
 Loaded 'controller/joint_state'
 Loaded 'controller/joint_state'
