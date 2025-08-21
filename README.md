@@ -58,7 +58,7 @@ joint_sub.py
 It subscribes /senseglove/rh/fingertip_positions, and publishes shadow hand joint position using GeoRT, retargeting method through Isaacsim.
 
 
-## Training retargeting model
+## Train retargeting model
 We used retargeting method of GeoRT: <<https://github.com/facebookresearch/GeoRT>>
 Project website: <<https://zhaohengyin.github.io/geort/>>
 It retargets fingertip coordinate to joint position using FK neural network.
