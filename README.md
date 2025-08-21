@@ -1,8 +1,6 @@
-# rirolab_intern
+# RIROLAB_intern
 Internship program for Geon Woo of RIRO_LAB
 This is about how to set up teloperation for senseglove and shadowhand lite in Isaac-Sim
-
-
 
 ## Senseglove setup
 
@@ -19,11 +17,8 @@ roslaunch senseglove_launch senseglove_demo.launch
 Then, you can check Sensecom works. If all topics are successfully published, you can check the below logs. If it does not work, you have to try again until it succeeds
 
 Started ['controller/joint_state'] successfully
-
 Started ['controller/joint_state'] successfully
-
 Started ['controller/trajectory'] successfully
-
 Started ['controller/trajectory'] successfully
 
 As the topics are published in ros1, you need to bridge them to ros2.
@@ -60,8 +55,32 @@ cd isaacsim
 ```
 
 joint_sub.py
-It subscribes / 
+It subscribes /senseglove/rh/fingertip_positions, and publishes shadow hand joint position using GeoRT, retargeting method through Isaacsim.
 
+
+## Training retargeting model
+We used retargeting method of GeoRT: <<https://github.com/facebookresearch/GeoRT>>
+Project website: <<https://zhaohengyin.github.io/geort/>>
+It retargets fingertip coordinate to joint position using FK neural network.
+
+### Motion capture
+First, you need to record fingertip positions with Senseglove.
+Open another terminal.
+
+```bash
+conda activate isaac-sim-kgw
+cd GeoRT
+python geort/senseglove_mocap.py
+```
+```senseglove_mocap.py``` subscribes ```/senseglove/rh/fingergip_positions``` and captures coordinates of fingertips to npy file. 
+
+During motion capture, repeat folding and stretching hands. Perform several pinch movements with your fingers.  And you need to stretch each finger as much as possible to accumulate data.
+It may take 5 minutes. 
+
+Give a name of the dataset with  ```data_output_name``` in ```main()```.
+It is saved in ```data/{your dataset name}.npy```
+
+### Training
 
 ## shadow hand setup procedure
 This should be implemented in shadow hand laptop. 
