@@ -7,11 +7,12 @@ This is about how to set up teloperation for senseglove and shadowhand lite in I
 ## Senseglove setup
 
 ### Publish topics from senseglove
-First, open a new terminal.
+Open a new terminal.
 
 ```bash
 source /opt/ros/noetic/setup.bash
 cd senseglove_ws
+source devel/setup.bash
 roslaunch senseglove_launch senseglove_demo.launch
 ```
 
@@ -27,15 +28,6 @@ Started ['controller/trajectory'] successfully
 
 As the topics are published in ros1, you need to bridge them to ros2.
 
-### Bridge ros1 & ros2
-Second, open a new terminal.
-
-```bash
-source /opt/ros/noetic/setup.bash
-source /opt/ros/foxy/setup.bash
-ros2 run ros1_bridge dynamic_bridge --bridge-all-topics
-```
-
 ### Check fingertip topic (optional)
 It is optional for checking topic /senseglove/rh/fingertip_positions
 
@@ -46,33 +38,48 @@ ros2 topic echo /senseglove/rh/fingertip_positions
 
 /senseglove/rh/fingertip_positions topic refers to the xyz coordianate of thumb, index, middle, ring, pinky.
 
-### Isaacsim teleoperation 
-Third, 
+### Bridge ros1 & ros2
+You have to bridge ros1 message to ros2 message using dynamic bridge.
+Open another terminal.
+
+```bash
+source /opt/ros/noetic/setup.bash
+source /opt/ros/foxy/setup.bash
+ros2 run ros1_bridge dynamic_bridge --bridge-all-topics
+```
+
+## Isaac sim teleoperation
+You can teleoperate shadow-hand-lite in isaacsim.
+Confirm the above senseglove setup.
+
+```bash
+conda activate isaac-sim-kgw
+humble
+cd isaacsim
+./python.sh scripts/joint_sub.py
+```
+
+joint_sub.py
+It subscribes / 
 
 
-### shadow hand setup procedure
+## shadow hand setup procedure
 This should be implemented in shadow hand laptop. 
-
-First, follow the below connecting procedures.
-
-1. Connect the Ethernet between the NUC and the laptop using the instructions above
-
-2. Power on the laptop
-
-3. Connect an Ethernet cable providing external internet connection to the back of the laptop
-
-4. Power on the NUC
-
-5. Make sure the laptop has only 1 USB-Ethernet adapter connected to it.
-
-6. In case of using another laptop than one provided, please follow the instructions below to install the software.
-
-7. Power on the hand(s)
-
-8. Connect the right hand to the USB-Ethernet adapter labelled “HAND RIGHT” which should be plugged in to the NUC, as explained above
-
-9. Connect the left hand to the USB-Ethernet adapter labelled “HAND LEFT” which should be plugged in to the NUC, as explained above
-
-**important**
-
+Follow the connecting procedures : <<https://shadow-robot-company-dexterous-hand.readthedocs-hosted.com/en/latest/user_guide/sh_connecting_cables.html>>
 You must follow the procedure in order. 
+
+
+### Gazebo
+Export ROS_MASTER_URI in the docker. For not using *localhost*
+
+```bash
+export ROS_MASTER_URI=http://server:11311
+```
+
+roslaunch sr_robot_launch srhand.launch sim:=true hand_type:=hand_g
+
+desktop_ip=192.168.0.61 
+laptop_ip=192.168.0.171
+server=10.9.11.1
+nuc_control=10.9.11.2
+
