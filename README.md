@@ -55,6 +55,7 @@ cd isaacsim
 ```
 
 joint_sub.py
+
 It subscribes /senseglove/rh/fingertip_positions, and publishes shadow hand joint position using GeoRT, retargeting method through Isaacsim.
 You can choose the trained model through ```checkpoint_tag``` in line 104. 
 The trained model is in /GeoRT/checkpoint.
@@ -66,7 +67,8 @@ Project website: <<https://zhaohengyin.github.io/geort/>>
 It retargets five fingertip coordinates to the joint positions in robot hand using FK neural network.
 
 #### Motion capture
-First, you need to record fingertip positions with Senseglove.
+You need to record fingertip positions with Senseglove.
+Be confirmed if senseglove publishes the topic '/senseglove/rh/fingertip_positions' and ros bridge is working.
 Open another terminal.
 
 ```bash
@@ -82,20 +84,55 @@ It may take 5 minutes.
 Give a name of the dataset with  ```data_output_name``` in ```main()```.
 It is saved in ```data/{your dataset name}.npy```
 
-### Training
-
-## shadow hand setup procedure
-This should be implemented in shadow hand laptop. 
-Follow the connecting procedures : <<https://shadow-robot-company-dexterous-hand.readthedocs-hosted.com/en/latest/user_guide/sh_connecting_cables.html>>
-You must follow the procedure in order. 
-
-
-### Gazebo
-Export ROS_MASTER_URI in the docker. For not using *localhost*
+#### Training
+At the same terminal,
 
 ```bash
-export ROS_MASTER_URI=http://server:11311
+python geort/trainer.py -human_data {your dataset name} -ckpt_tag {your model name}
 ```
+
+Your trained retargeting model is saved in '/GeoRT/checkpoint'.
+Training takes almost 3 minutes. You can check your model in Isaac-sim with ```joint_sub.py```, described above.
+
+## shadow hand setup procedure
+You can teleoperate real shadow hand with trained model. 
+This should be implemented in shadow hand laptop. 
+
+Follow the connecting procedures : <<https://shadow-robot-company-dexterous-hand.readthedocs-hosted.com/en/latest/user_guide/sh_connecting_cables.html>>
+You must follow the procedure in order. If you don't, roscore problem will occur. Check the orange light of ethernet cables before you go next step.
+**important** 'LAPTOP NUC' is connected with your laptop and 'NUC TO LAPTOP' with NUC. If not, roscore problem occurs.
+
+#### Launch 
+If they are correctly connected, click 'Shadow Launcher Dext..' and 'Launch Shadow Right Hand.desktop'.
+Then, Server container, roscore, ... start to be executed.
+
+In desktop, you need to publish topic about joint positions.
+
+At the same terminal that **Publish topics from senseglove** above, change ros master uri to shadow hand nuc. 
+```bash
+export ROS_MASTER_URI=http://server:11311
+source devel/setup.bash
+roslaunch senseglove_launch senseglove_demo.launch
+```
+Open a new terminal.
+
+```bash
+conda activate shadow_teleop
+source /opt/ros/noetic/setup.bash
+cd ~/shadow_ws/src/fingertip_to_qpos/scripts
+python fingertip_to_qpos.py -checkpoint_tag {your model name}
+```
+
+fingertip_to_qpos.py
+
+This script subscribes fingertip positions of senseglove and publishes joint position. 
+
+In container, 
+```bash
+roscd sr_example/scripts/sr_example/kgw_scripts
+python teleoperate.py
+```
+
 
 roslaunch sr_robot_launch srhand.launch sim:=true hand_type:=hand_g
 
