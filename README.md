@@ -1,10 +1,10 @@
 # RIROLAB_intern
-Internship program for Geon Woo of RIRO_LAB
+Internship program for Geon Woo in RIRO_LAB
 This is about how to set up teloperation for senseglove and shadowhand lite in Isaac-Sim
 
 ## Senseglove setup
 
-### Publish topics from senseglove
+#### Publish topics from senseglove
 Open a new terminal.
 
 ```bash
@@ -15,15 +15,15 @@ roslaunch senseglove_launch senseglove_demo.launch
 ```
 
 Then, you can check Sensecom works. If all topics are successfully published, you can check the below logs. If it does not work, you have to try again until it succeeds
-
+```bash
 Started ['controller/joint_state'] successfully
 Started ['controller/joint_state'] successfully
 Started ['controller/trajectory'] successfully
 Started ['controller/trajectory'] successfully
-
+```
 As the topics are published in ros1, you need to bridge them to ros2.
 
-### Check fingertip topic (optional)
+#### Check fingertip topic (optional)
 It is optional for checking topic /senseglove/rh/fingertip_positions
 
 ```bash
@@ -33,7 +33,7 @@ ros2 topic echo /senseglove/rh/fingertip_positions
 
 /senseglove/rh/fingertip_positions topic refers to the xyz coordianate of thumb, index, middle, ring, pinky.
 
-### Bridge ros1 & ros2
+#### Bridge ros1 & ros2
 You have to bridge ros1 message to ros2 message using dynamic bridge.
 Open another terminal.
 
@@ -56,14 +56,16 @@ cd isaacsim
 
 joint_sub.py
 It subscribes /senseglove/rh/fingertip_positions, and publishes shadow hand joint position using GeoRT, retargeting method through Isaacsim.
-
+You can choose the trained model through ```checkpoint_tag``` in line 104. 
+The trained model is in /GeoRT/checkpoint.
+The training procedure is described below.
 
 ## Train retargeting model
 We used retargeting method of GeoRT: <<https://github.com/facebookresearch/GeoRT>>
 Project website: <<https://zhaohengyin.github.io/geort/>>
-It retargets fingertip coordinate to joint position using FK neural network.
+It retargets five fingertip coordinates to the joint positions in robot hand using FK neural network.
 
-### Motion capture
+#### Motion capture
 First, you need to record fingertip positions with Senseglove.
 Open another terminal.
 
