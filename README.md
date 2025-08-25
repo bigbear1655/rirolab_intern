@@ -3,6 +3,7 @@ Internship program for Geon Woo in RIRO_LAB.
 
 This is about how to set up teloperation for senseglove and shadowhand lite in Isaac-Sim
 
+---------------------------------------
 ## Senseglove setup
 
 #### Publish topics from senseglove
@@ -45,6 +46,7 @@ source /opt/ros/foxy/setup.bash
 ros2 run ros1_bridge dynamic_bridge --bridge-all-topics
 ```
 
+--------------------------------
 ## Isaac sim teleoperation
 You can teleoperate shadow-hand-lite in isaacsim.
 
@@ -67,6 +69,7 @@ The trained model is in /GeoRT/checkpoint.
 
 The training procedure is described below.
 
+------------------------------
 ## Train retargeting model
 We used retargeting method of GeoRT: <<https://github.com/facebookresearch/GeoRT>>
 
@@ -108,6 +111,7 @@ Your trained retargeting model is saved in '/GeoRT/checkpoint'.
 
 Training takes almost 3 minutes. You can check your model in Isaac-sim with ```joint_sub.py```, described above.
 
+----------------------------------------
 ## shadow hand setup procedure
 You can teleoperate real shadow hand with trained model. 
 
