@@ -1,5 +1,5 @@
 # RIROLAB_intern
-Internship program for Geon Woo in RIRO_LAB
+Internship program for Geon Woo in RIRO_LAB.
 This is about how to set up teloperation for senseglove and shadowhand lite in Isaac-Sim
 
 ## Senseglove setup
