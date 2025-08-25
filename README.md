@@ -151,8 +151,14 @@ In container,
 roscd sr_example/scripts/sr_example/kgw_scripts
 python teleoperate.py
 ```
+#### Shut down
+Click 'Shadow Close Everything.desktop' before you turn off the shadow hand.
+
+Deconnect everything along the connecting procedure in reverse order. 
 
 
+----------------
+## Memo
 roslaunch sr_robot_launch srhand.launch sim:=true hand_type:=hand_g
 
 desktop_ip=192.168.0.61 
