@@ -8,6 +8,7 @@ This is about how to set up teloperation for senseglove and shadowhand lite in I
 
 #### Publish topics from senseglove
 Open a new terminal.
+Connect senseglove.
 
 ```bash
 source /opt/ros/noetic/setup.bash
