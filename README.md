@@ -151,11 +151,12 @@ fingertip_to_qpos.py
 
 This script subscribes fingertip positions of senseglove and publishes joint position. 
 
-In container, 
+In container (laptop), 
 ```bash
 roscd sr_example/scripts/sr_example/kgw_scripts
 python teleoperate.py
 ```
+
 #### Shut down
 Click 'Shadow Close Everything.desktop' before you turn off the shadow hand.
 
