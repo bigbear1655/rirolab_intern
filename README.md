@@ -112,7 +112,7 @@ Your trained retargeting model is saved in '/GeoRT/checkpoint'.
 Training takes almost 3 minutes. You can check your model in Isaac-sim with ```joint_sub.py```, described above.
 
 ----------------------------------------
-## shadow hand setup procedure
+## Shadow hand setup procedure
 You can teleoperate real shadow hand with trained model. 
 
 This should be implemented in shadow hand laptop. 
@@ -159,6 +159,27 @@ python teleoperate.py
 Click 'Shadow Close Everything.desktop' before you turn off the shadow hand.
 
 Deconnect everything along the connecting procedure in reverse order. 
+
+----------------------------
+## Isaaclab
+You can train shadowhand lite model using Isaaclab : <<https://github.com/rirolab/isaacsim_ws/tree/main/src/isaacsim_rl>>
+
+#### Task
+```bash
+cd isaacsim_ws
+
+
+#### Train
+
+```bash
+conda activate isaac-lab-kgw
+cd IsaacLab
+source _isaac_sim/setup_conda_env.sh
+./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py --task Riro-Repose-Cube-Shadow-Lite-Direct-v0 --num_envs 128 --headless
+```
+
+#### Play
+
 
 
 ----------------
