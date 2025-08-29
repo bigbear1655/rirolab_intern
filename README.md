@@ -144,6 +144,7 @@ conda activate shadow_teleop
 source /opt/ros/noetic/setup.bash
 cd ~/shadow_ws/src/fingertip_to_qpos/scripts
 python fingertip_to_qpos.py -checkpoint_tag {your model name}
+# python fingertip_to_qpos.py -checkpoint_tag best_model
 ```
 
 fingertip_to_qpos.py
