@@ -118,6 +118,8 @@ You can teleoperate real shadow hand with trained model.
 
 This should be implemented in shadow hand laptop. 
 
+laptop passwork: shadow251
+
 Follow the connecting procedures : <<https://shadow-robot-company-dexterous-hand.readthedocs-hosted.com/en/latest/user_guide/sh_connecting_cables.html>>
 
 You must follow the procedure in order. If you don't, roscore problem will occur. Check the orange light of ethernet cables before you go next step.
