@@ -118,7 +118,7 @@ You can teleoperate real shadow hand with trained model.
 
 This should be implemented in shadow hand laptop. 
 
-laptop passwork: shadow251
+laptop password: shadow251
 
 Follow the connecting procedures : <<https://shadow-robot-company-dexterous-hand.readthedocs-hosted.com/en/latest/user_guide/sh_connecting_cables.html>>
 
@@ -136,7 +136,7 @@ In desktop, you need to publish topic about joint positions.
 At the same terminal that **Publish topics from senseglove** above, change ros master uri to shadow hand nuc. 
 
 ```bash
-export ROS_MASTER_URI=http://server:11311
+export ROS_MASTER_URI=http://Shadow_Server:11311
 source devel/setup.bash
 roslaunch senseglove_launch senseglove_demo.launch
 ```
@@ -145,6 +145,7 @@ Open a new terminal.
 ```bash
 conda activate shadow_teleop
 source /opt/ros/noetic/setup.bash
+export ROS_MASTER_URI=http://Shadow_Server:11311
 cd ~/shadow_ws/src/fingertip_to_qpos/scripts
 python fingertip_to_qpos.py -checkpoint_tag {your model name}
 # python fingertip_to_qpos.py -checkpoint_tag best_model
