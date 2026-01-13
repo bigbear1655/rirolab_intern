@@ -197,3 +197,20 @@ laptop_ip=192.168.0.171
 server=10.9.11.1
 nuc_control=10.9.11.2
 
+frame
+[shadow hand]
+
++x: thumb
+
++y: direction of palm
+
++z: middle
+
+[senseglove]
+
++x: middle
+
++y: thumb
+
++z: direction of palm
+
